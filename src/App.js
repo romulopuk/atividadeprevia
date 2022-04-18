@@ -6,8 +6,8 @@ import WeightInput from './components/WeightInput';
 
 
 export default function App() {
-  const [height, setHeight] = useState(1.50);
-  const [weight, setWeight] = useState(90);
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
 
 
   function handleHeightChange(newHeight) {
@@ -20,6 +20,7 @@ export default function App() {
 
 
   let imc = (weight/(height*height))
+
   let imcToShow = imc.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   
   let result = 
@@ -37,7 +38,9 @@ export default function App() {
     "Magreza I":
     imc >= 16 ?
     "Magreza II":
-    "Magreza III"
+    imc < 16 ?
+    "Magreza III":
+    "Insira um número válido"
 
   return (
     <>
@@ -58,7 +61,7 @@ export default function App() {
           autoFocus
         />
 
-        <p>Seu IMC é: {imcToShow} - {result}.</p>
+        <p>Seu IMC é: {imc > 0.01 ? imcToShow : 0} - {result}.</p>
       </Main>
 
     </>
